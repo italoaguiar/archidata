@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<create>
+  <Types>
+    <type name="INT" base="int" hasLength="false">
+      <value>
+        <string>INT</string>
+      </value>
+      <default>
+        <string></string>
+      </default>
+    </type>
+    <type name="INT" base="int" hasLength="true">
+      <string>INT({{LENGTH}})</string>
+    </type>
+  </Types>
+  
+  <DATABASE>
+    <string>CREATE DATABASE {{NAME}};</string>
+  </DATABASE>
+  
+  <TABLE>
+    <HEADER>
+      <string>CREATE TABLE {{NAME}}(</string>
+      <linebreak/>
+    </HEADER>
+    <FIELDS>
+      <FIELDS.Separator>
+        <string>,</string>
+      </FIELDS.Separator>      
+      <string>{{NAME}} {{TYPE}} {{NOTNULL}} {{AUTOINCREMENT}} {{DEFAULT}}</string>
+      <separator/>
+      <linebreak/>
+    </FIELDS>
+    <FOOTER>
+      <string>);</string>
+      <linebreak/>
+      <linebreak/>
+    </FOOTER>
+  </TABLE>
+</create>
+

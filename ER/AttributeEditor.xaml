@@ -1,0 +1,190 @@
+﻿<Window x:Class="ER.AttributeEditor"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"             
+        xmlns:local="clr-namespace:ER"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen" Topmost="True"
+        ShowInTaskbar="False" Title="Editor de Propriedades"
+        WindowStyle="None" AllowsTransparency="True" Height="Auto"        
+        SizeToContent="WidthAndHeight"
+        Background="White" Style="{DynamicResource DefaultWindowStyle}"
+        d:DesignHeight="400" d:DesignWidth="600" MinWidth="750" MinHeight="100" MaxHeight="400">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Archidata.Core;component/Themes/Generic.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <SolidColorBrush x:Key="Button.Static.Background" Color="Transparent"/>
+            <SolidColorBrush x:Key="Button.MouseOver.Background" Color="#FFF5F5F5"/>
+            <SolidColorBrush x:Key="Button.Pressed.Background" Color="#FFDBDBDB"/>
+            <SolidColorBrush x:Key="Button.Disabled.Background" Color="#FFF4F4F4"/>
+            <SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#FF838383"/>
+            <Style TargetType="{x:Type Button}" x:Key="CloseBtn">
+                <Setter Property="Background" Value="{StaticResource Button.Static.Background}"/>
+                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+                <Setter Property="HorizontalContentAlignment" Value="Left"/>
+                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                <Setter Property="VerticalAlignment" Value="Stretch"/>
+                <Setter Property="Padding" Value="10"/>
+                <Setter Property="Margin" Value="0"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <!--<Viewbox x:Name="container" Stretch="Fill">-->
+                            <Border x:Name="border" Background="{TemplateBinding Background}" SnapsToDevicePixels="true">
+                                <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                            </Border>
+                            <!--</Viewbox>-->
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsDefaulted" Value="true">
+                                    <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                                </Trigger>
+                                <Trigger Property="IsMouseOver" Value="true">
+                                    <Setter Property="Background" TargetName="border" Value="{StaticResource Button.MouseOver.Background}"/>
+                                </Trigger>
+                                <Trigger Property="IsPressed" Value="true">
+                                    <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Pressed.Background}"/>
+                                </Trigger>
+                                <Trigger Property="IsEnabled" Value="false">
+                                    <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Disabled.Background}"/>
+                                    <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{StaticResource Button.Disabled.Foreground}"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Path x:Key="CloseIcon" x:Shared="False"  Stretch="Uniform" Fill="#FF000000" Data="F1 M 6.48328,34.2534L 19.406,21.3307L 6.48328,8.40794L 8.40794,6.48328L 21.3307,19.406L 34.2534,6.48328L 36.178,8.40794L 23.2553,21.3307L 36.178,34.2534L 34.2534,36.1781L 21.3307,23.2553L 8.40794,36.1781L 6.48328,34.2534 Z "/>
+            <BooleanToVisibilityConverter x:Key="VisibilityConverter"/>
+            <Style TargetType="{x:Type Button}">
+                <Setter Property="Focusable" Value="False"/>
+                <Setter Property="Background" Value="White"/>
+                <Setter Property="BorderBrush" Value="DarkGray"/>
+                <Setter Property="Foreground" Value="#4F4F4F"/>
+                <Setter Property="BorderThickness" Value="1"/>
+                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                <Setter Property="Padding" Value="4"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="true">
+                                <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="true">
+                                    <Setter Property="BorderBrush" TargetName="border" Value="Black"/>
+                                </Trigger>
+                                <Trigger Property="IsPressed" Value="true">
+                                    <Setter Property="Background" TargetName="border" Value="#D9D9D9"/>
+                                    <Setter Property="BorderBrush" TargetName="border" Value="Black"/>
+                                </Trigger>
+                                <Trigger Property="IsEnabled" Value="false">
+                                    <Setter Property="Background" TargetName="border" Value="#EAEAEA"/>
+                                    <Setter Property="BorderBrush" TargetName="border" Value="#D9D9D9"/>
+                                    <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="#BEBEBE"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Grid >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*" MinHeight="200"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid  Background="White" MouseDown="OnWindowMouseDown">
+                <TextBlock Foreground="#FF484848" Text="{Binding Path=Title, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            </Grid>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Column="1">
+                <Button Content="{StaticResource CloseIcon}" Width="25" Padding="8" HorizontalContentAlignment="Center" Style="{StaticResource CloseBtn}" Click="Button_Click" />
+            </StackPanel>
+        </Grid>
+
+        <Border Grid.Row="1">
+            <Grid Margin="0,10,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="5*"/>
+                    <ColumnDefinition Width="140"/>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="5*"/>
+                    <ColumnDefinition Width="30"/>
+                    <ColumnDefinition Width="30"/>
+                    <ColumnDefinition Width="30"/>
+                    <ColumnDefinition Width="45"/>
+                    <ColumnDefinition Width="45"/>
+                    <ColumnDefinition Width="60"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" Margin="2" TextAlignment="Center" FontSize="11">Campo</TextBlock>
+                <TextBlock Grid.Column="1" Margin="2" HorizontalAlignment="Center" FontSize="11">Tipo</TextBlock>
+                <TextBlock Grid.Column="2" Margin="2" HorizontalAlignment="Center" FontSize="11">Tamanho</TextBlock>
+                <TextBlock Grid.Column="3" Margin="2" HorizontalAlignment="Center" FontSize="11">Padrão</TextBlock>
+                <TextBlock Grid.Column="4" Margin="2" HorizontalAlignment="Center" FontSize="11" ToolTip="Primary Key">PK</TextBlock>
+                <TextBlock Grid.Column="5" Margin="0,2" HorizontalAlignment="Center" FontSize="11" ToolTip="Not Null">NN</TextBlock>
+                <TextBlock Grid.Column="6" Margin="2" HorizontalAlignment="Center" FontSize="11" ToolTip="Auto Increment">AI</TextBlock>
+                <TextBlock Grid.Column="7" Margin="2" HorizontalAlignment="Center" FontSize="11" ToolTip="Define o valor de partida do campo">Inicial</TextBlock>
+                <TextBlock Grid.Column="8" Margin="2" HorizontalAlignment="Center" FontSize="11" ToolTip="Define o valor a ser incrementado em cada inserção">Increm.</TextBlock>
+            </Grid>
+        </Border>
+        <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Hidden"  Margin="0">
+            <ItemsControl ItemsSource="{Binding}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Height="28">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="5*"/>
+                                <ColumnDefinition Width="140"/>
+                                <ColumnDefinition Width="3*"/>
+                                <ColumnDefinition Width="5*"/>
+                                <ColumnDefinition Width="30"/>
+                                <ColumnDefinition Width="30"/>
+                                <ColumnDefinition Width="30"/>
+                                <ColumnDefinition Width="45"/>
+                                <ColumnDefinition Width="45"/>
+                                <ColumnDefinition Width="45"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBox Grid.Column="0" Margin="3" Text="{Binding Name,Mode=TwoWay}"/>
+                            <ComboBox Grid.Column="1" Margin="3" SelectedItem="{Binding Type, Mode=OneWay}" Tag="{Binding}" ItemsSource="{Binding Types, RelativeSource={RelativeSource AncestorType=Window}}" SelectionChanged="ComboBox_SelectionChanged">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Name}"/>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                            <TextBox x:Name="len" IsEnabled="{Binding Type.HaveLength}" Grid.Column="2" Margin="3" Text="{Binding Length,Mode=TwoWay,UpdateSourceTrigger=LostFocus,ValidatesOnExceptions=True}" MaxLength="4" />
+                            <TextBox Grid.Column="3" Margin="3" Text="{Binding Default,Mode=TwoWay,UpdateSourceTrigger=LostFocus}"/>
+                            <CheckBox Grid.Column="4" IsChecked="{Binding PrimaryKey,Mode=TwoWay}" Margin="3" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            <CheckBox Grid.Column="5" Margin="3" VerticalAlignment="Center" HorizontalAlignment="Center" IsChecked="{Binding NotNull,Mode=TwoWay,UpdateSourceTrigger=LostFocus}"/>
+                            <CheckBox x:Name="ai" Grid.Column="6" Margin="3" VerticalAlignment="Center" HorizontalAlignment="Center" IsChecked="{Binding AutoIncrement.UseAutoIncrement,Mode=TwoWay,UpdateSourceTrigger=LostFocus}"/>
+                            <TextBox Grid.Column="7" Margin="3" IsEnabled="{Binding IsChecked,ElementName=ai}" Text="{Binding AutoIncrement.InitialValue,Mode=TwoWay,UpdateSourceTrigger=LostFocus}"/>
+                            <TextBox Grid.Column="8" Margin="3" IsEnabled="{Binding IsChecked,ElementName=ai}" Text="{Binding AutoIncrement.Increment,Mode=TwoWay,UpdateSourceTrigger=LostFocus}"/>
+                            <Button Grid.Column="9" Width="20" Height="20" Padding="5" Margin="3" Command="{Binding RemoveCommand, RelativeSource={RelativeSource AncestorType=Window}}" CommandParameter="{Binding}">
+                                <Path Stretch="Uniform" Fill="#FF686868" Data="F1 M 6.48328,34.2534L 19.406,21.3307L 6.48328,8.40794L 8.40794,6.48328L 21.3307,19.406L 34.2534,6.48328L 36.178,8.40794L 23.2553,21.3307L 36.178,34.2534L 34.2534,36.1781L 21.3307,23.2553L 8.40794,36.1781L 6.48328,34.2534 Z "/>
+                            </Button>
+                        </Grid>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+
+        <Border Grid.Row="3" Background="#FFF0F0F0" BorderBrush="#FFAAAAAA" BorderThickness="0,1,0,0">
+            <Button Grid.Column="3" HorizontalAlignment="Left" Content="Adicionar Atributo" Margin="5" Command="{Binding AddCommand, RelativeSource={RelativeSource AncestorType=Window}}"/>
+        </Border>
+    </Grid>
+</Window>

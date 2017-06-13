@@ -1,0 +1,357 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:k="clr-namespace:System.Collections.Generic;assembly=mscorlib"
+    xmlns:local="clr-namespace:ER"
+    xmlns:s="clr-namespace:System.ComponentModel;assembly=WindowsBase"
+    xmlns:c="clr-namespace:Archidata.Core.Controls;assembly=Archidata.Core"
+    xmlns:p="clr-namespace:Archidata.Core.Plugin.Diagram;assembly=Archidata.Core"
+    >
+
+
+    <Style x:Key="ToggleButtonStyle" TargetType="ToggleButton">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ToggleButton">
+                    <Border x:Name="border" BorderThickness="1" Background="Transparent" BorderBrush="Transparent">
+                        <Grid Margin="{TemplateBinding Padding}" VerticalAlignment="Center" HorizontalAlignment="Center">
+                            <ContentPresenter Content="{TemplateBinding Content}" />
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter Property="Background" Value="White" TargetName="border"/>
+                            <Setter Property="Border.BorderBrush" Value="Gray" TargetName="border"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="ScrollViewer" x:Key="ScrollViewerStyle">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ScrollViewer}">
+                    <ControlTemplate.Resources>
+                        <Storyboard x:Key="Storyboard1">
+                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="PART_HorizontalScrollBar">
+                                <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
+                                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0"/>
+                            </DoubleAnimationUsingKeyFrames>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="PART_HorizontalScrollBar">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
+                                <DiscreteObjectKeyFrame KeyTime="0:0:0.5" Value="{x:Static Visibility.Collapsed}"/>
+                            </ObjectAnimationUsingKeyFrames>
+                        </Storyboard>
+                        <Storyboard x:Key="Storyboard2">
+                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="PART_VerticalScrollBar">
+                                <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
+                                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0"/>
+                            </DoubleAnimationUsingKeyFrames>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="PART_VerticalScrollBar">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
+                                <DiscreteObjectKeyFrame KeyTime="0:0:0.5" Value="{x:Static Visibility.Collapsed}"/>
+                            </ObjectAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </ControlTemplate.Resources>
+                    <Grid x:Name="Grid" Background="{TemplateBinding Background}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <ScrollContentPresenter x:Name="PART_ScrollContentPresenter" CanContentScroll="{TemplateBinding CanContentScroll}" CanHorizontallyScroll="False" CanVerticallyScroll="False" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" Grid.Column="0" Margin="{TemplateBinding Padding}" Grid.Row="0"/>
+                        <ScrollBar x:Name="PART_VerticalScrollBar" AutomationProperties.AutomationId="VerticalScrollBar" Cursor="Arrow" Grid.Column="1" Maximum="{TemplateBinding ScrollableHeight}" Minimum="0" Grid.Row="0" Value="{Binding VerticalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" ViewportSize="{TemplateBinding ViewportHeight}" Visibility="Visible"/>
+                        <ScrollBar x:Name="PART_HorizontalScrollBar" AutomationProperties.AutomationId="HorizontalScrollBar" Cursor="Arrow" Grid.Column="0" Maximum="{TemplateBinding ScrollableWidth}" Minimum="0" Orientation="Horizontal" Grid.Row="1" Value="{Binding HorizontalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" ViewportSize="{TemplateBinding ViewportWidth}" Visibility="Visible"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="ComputedHorizontalScrollBarVisibility" Value="Collapsed">
+                            <Trigger.EnterActions>
+                                <BeginStoryboard Storyboard="{StaticResource Storyboard1}" x:Name="beginStoryboard1"/>
+                            </Trigger.EnterActions>
+                            <Trigger.ExitActions>
+                                <StopStoryboard  BeginStoryboardName="beginStoryboard1"/>                                
+                            </Trigger.ExitActions>
+                        </Trigger>
+                        <Trigger Property="ComputedVerticalScrollBarVisibility" Value="Collapsed">
+                            <Trigger.EnterActions>
+                                <BeginStoryboard Storyboard="{StaticResource Storyboard2}" x:Name="beginStoryboard2"/>                                
+                            </Trigger.EnterActions>
+                            <Trigger.ExitActions>
+                                <RemoveStoryboard BeginStoryboardName="beginStoryboard2"/>
+                            </Trigger.ExitActions>
+                        </Trigger>
+                        <!--<Trigger Property="HorizontalScrollBarVisibility" Value="{x:Static ScrollBarVisibility.Visible}">
+                            <Setter Property="Visibility" Value="Visible" TargetName="PART_HorizontalScrollBar"/>
+                            <Setter Property="Opacity" Value="1" TargetName="PART_HorizontalScrollBar"/>
+                        </Trigger>
+                        <Trigger Property="VerticalScrollBarVisibility" Value="{x:Static ScrollBarVisibility.Visible}">
+                            <Setter Property="Visibility" Value="Visible" TargetName="PART_VerticalScrollBar"/>
+                            <Setter Property="Opacity" Value="1" TargetName="PART_VerticalScrollBar"/>
+                        </Trigger>-->
+
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="ComboBoxStyle" TargetType="ComboBox">
+        <Setter Property="MinWidth" Value="0"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ComboBox}">
+                    <Grid x:Name="templateRoot" SnapsToDevicePixels="true">
+                        <Popup x:Name="PART_Popup" AllowsTransparency="true" Grid.ColumnSpan="2" IsOpen="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" Margin="1" PopupAnimation="Fade" Placement="Bottom">
+                            <Border x:Name="dropDownBorder" BorderBrush="{DynamicResource {x:Static SystemColors.WindowFrameBrushKey}}" BorderThickness="1" Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}">
+                                <ScrollViewer x:Name="DropDownScrollViewer">
+                                    <Grid x:Name="grid" RenderOptions.ClearTypeHint="Enabled">
+                                        <Canvas x:Name="canvas" HorizontalAlignment="Left" Height="0" VerticalAlignment="Top" Width="0">
+                                            <Rectangle x:Name="opaqueRect" Fill="{Binding Background, ElementName=dropDownBorder}" Height="{Binding ActualHeight, ElementName=dropDownBorder}" Width="{Binding ActualWidth, ElementName=dropDownBorder}"/>
+                                        </Canvas>
+                                        <ItemsPresenter x:Name="ItemsPresenter" KeyboardNavigation.DirectionalNavigation="Contained" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                                    </Grid>
+                                </ScrollViewer>
+                            </Border>
+                        </Popup>
+                        <ToggleButton Style="{StaticResource ToggleButtonStyle}" x:Name="toggleButton" Padding="10,5" BorderThickness="0" Background="Transparent" Grid.ColumnSpan="2" IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" />
+                        <ContentPresenter x:Name="contentPresenter" Content="{TemplateBinding SelectionBoxItem}" HorizontalAlignment="Center" IsHitTestVisible="false" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="Center"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="HasItems" Value="false">
+                            <Setter Property="Height" TargetName="dropDownBorder" Value="95"/>
+                        </Trigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsGrouping" Value="true"/>
+                                <Condition Property="VirtualizingPanel.IsVirtualizingWhenGrouping" Value="false"/>
+                            </MultiTrigger.Conditions>
+                            <Setter Property="ScrollViewer.CanContentScroll" Value="false"/>
+                        </MultiTrigger>
+                        <Trigger Property="ScrollViewer.CanContentScroll" SourceName="DropDownScrollViewer" Value="false">
+                            <Setter Property="Canvas.Top" TargetName="opaqueRect" Value="{Binding VerticalOffset, ElementName=DropDownScrollViewer}"/>
+                            <Setter Property="Canvas.Left" TargetName="opaqueRect" Value="{Binding HorizontalOffset, ElementName=DropDownScrollViewer}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="local:Connector">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="local:Connector">
+                    <Canvas>
+                        <Polyline StrokeThickness="1" Stroke="#FF424242" Points="{TemplateBinding Points}"  />
+                        <ComboBox 
+                            x:Name="PART_COMBOSELECTOR"
+                            Style="{StaticResource ComboBoxStyle}"
+                            SelectedIndex="0" 
+                            Visibility="{Binding CardinalityVisibility,RelativeSource={RelativeSource TemplatedParent}}"
+                            Canvas.Left="{Binding MediumPoint.X,RelativeSource={RelativeSource TemplatedParent}}"
+                            Canvas.Top="{Binding MediumPoint.Y,RelativeSource={RelativeSource TemplatedParent}}">
+                            <ComboBoxItem>*</ComboBoxItem>
+                            <ComboBoxItem>1</ComboBoxItem>
+                        </ComboBox>
+                    </Canvas>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+
+   
+
+
+    <Style TargetType="local:ERDiagram">
+        <Setter Property="Padding" Value="10"/>
+        <Setter Property="BorderBrush" Value="Black"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Background">
+            <Setter.Value>
+                <VisualBrush TileMode="Tile"
+                        Viewport="0,0,15,15" ViewportUnits="Absolute" 
+                        Viewbox="0,0,15,15" ViewboxUnits="Absolute">
+                    <VisualBrush.Visual>
+                        <Rectangle Fill="White" Stroke="Darkgray" StrokeThickness="0.05" Height="15" Width="15"/>
+                    </VisualBrush.Visual>
+                </VisualBrush>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="local:ERDiagram">
+                    <ControlTemplate.Resources>
+                        <DataTemplate x:Key="EntityTemplate">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <c:Resizeable IsSelected="{Binding IsSelected,RelativeSource={RelativeSource AncestorType=p:DiagramViewItem}}" Location="{Binding Location,Mode=TwoWay}" Size="{Binding Size,Mode=TwoWay}" VerticalAlignment="Top">
+                                    <Border Background="{Binding Theme.Background,FallbackValue=White}" BorderBrush="{Binding Theme.BorderBrush, FallbackValue=#FF003657}" BorderThickness="{Binding Theme.BorderThickness,FallbackValue=1}">
+                                        <TextBox Text="{Binding Name,Mode=TwoWay}" BorderThickness="0" Background="{Binding Theme.Background,FallbackValue=White}" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{Binding Theme.Foreground,FallbackValue=Black}"/>
+                                    </Border>
+                                </c:Resizeable>
+                                <Grid Grid.Column="1" Margin="6,0,0,0" Panel.ZIndex="-1" VerticalAlignment="Top">
+                                    <Line x:Name="L1" X1="0" X2="1" Stroke="{Binding Theme.BorderBrush, FallbackValue=#FF003657}" StrokeThickness="1" Stretch="Fill" Width="11" Margin="-10,7,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                                    <Line x:Name="L2" Y1="0" Y2="1" Stroke="{Binding Theme.BorderBrush, FallbackValue=#FF003657}" StrokeThickness="1" Stretch="Fill" Width="11" Margin="0,7,0,7" HorizontalAlignment="Left" VerticalAlignment="Stretch"/>
+                                    <ItemsControl ItemsSource="{Binding Attributes}">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <Line X1="0" X2="1" Stroke="#FF003657" StrokeThickness="1" Width="5" Stretch="Fill"/>
+                                                    <Ellipse x:Name="elp" Stroke="#FF003657" StrokeThickness="0.5" Width="10" Height="10"/>
+                                                    <Path x:Name="key" Visibility="Collapsed" Width="10" Height="10" Stretch="Uniform" Fill="#FF003657" Data="F1 M 12,3.45313C 14.1876,3.45313 15.9609,5.2265 15.9609,7.41406C 15.9609,9.37261 14.5394,10.9992 12.6719,11.3183L 12.6719,14.2344L 16.0938,14.2344L 16.0938,15.5781L 12.6719,15.5781L 12.6719,18.6719L 16.0938,18.6719L 16.0938,20.0156L 12.6719,20.0156L 12.6719,21.4219L 11.3281,21.4219L 11.3281,11.3183C 9.46056,10.9992 8.03906,9.37261 8.03906,7.41406C 8.03906,5.2265 9.81244,3.45313 12,3.45313 Z M 12,4.76563C 10.4898,4.76563 9.26562,5.98985 9.26562,7.5C 9.26562,9.01016 10.4898,10.2344 12,10.2344C 13.5102,10.2344 14.7344,9.01016 14.7344,7.5C 14.7344,5.98985 13.5101,4.76563 12,4.76563 Z "/>
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <TextBlock Text="{Binding Name}" Foreground="Black" Margin="3,0,0,0" FontSize="14" MinHeight="0" Padding="0"/>
+                                                        <TextBlock Text="{Binding Type,StringFormat=':{0}'}" Margin="3,0,0,0" Foreground="DarkGray" FontSize="11" VerticalAlignment="Bottom" MinHeight="0" Padding="0"/>
+                                                        <TextBlock x:Name="len" Text="{Binding Length,StringFormat='({0})'}" Margin="3,0,0,0" Foreground="DarkGray" FontSize="11" VerticalAlignment="Bottom" MinHeight="0" Padding="0"/>
+                                                    </StackPanel>
+                                                </StackPanel>
+                                                <DataTemplate.Triggers>
+                                                    <DataTrigger Binding="{Binding Type.HaveLength}" Value="false">
+                                                        <Setter Property="Visibility" Value="Collapsed" TargetName="len"/>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding PrimaryKey}" Value="true">
+                                                        <Setter Property="Visibility" Value="Visible" TargetName="key"/>
+                                                        <Setter Property="Visibility" Value="Collapsed" TargetName="elp"/>
+                                                    </DataTrigger>
+                                                </DataTemplate.Triggers>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+                                </Grid>
+                            </Grid>
+                        </DataTemplate>
+
+                        <DataTemplate x:Key="RelationshipTemplate">
+                            <Canvas>
+                                <c:Resizeable x:Name="rsz" Size="{Binding Size,Mode=TwoWay}" Location="{Binding Location,Mode=TwoWay}" Canvas.Left="{Binding Location.X}" Canvas.Top="{Binding Location.Y}" IsSelected="{Binding IsSelected,RelativeSource={RelativeSource AncestorType=p:DiagramViewItem}}" Tag="{Binding}">
+                                    <Grid>
+                                        <Path  Data="M50,0L100,50 50,100 0,50z" Fill="{Binding Theme.Background,FallbackValue=White}" Stretch="Fill" Stroke="{Binding Theme.BorderBrush, FallbackValue=#FF003657}" StrokeThickness="{Binding Theme.BorderThickness,FallbackValue=1}" Margin="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                                        <TextBox Text="{Binding Name,Mode=TwoWay}" BorderThickness="0" Background="{Binding Theme.Background,FallbackValue=White}" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{Binding Theme.Foreground,FallbackValue=Black}"/>
+                                    </Grid>
+                                </c:Resizeable>
+                                <ItemsControl ItemsSource="{Binding Connections}" Panel.ZIndex="-1">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <local:Connector TargetLocation="{Binding Target.Location}" TargetSize="{Binding Target.Size}"
+                                                                     OriginLocation="{Binding Tag.Location,ElementName=rsz}" OriginSize="{Binding Tag.Size,ElementName=rsz}"
+                                                                     Cardinality="{Binding Cardinality,Mode=TwoWay}" VerticalAlignment="Top" HorizontalAlignment="Left"
+                                                                     />
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </Canvas>
+                        </DataTemplate>
+
+                        <DataTemplate x:Key="SpecializationTemplate">
+                            <Canvas>
+                                <c:Resizeable x:Name="rsz" MinWidth="80" MinHeight="80" Size="{Binding Size,Mode=TwoWay}" Location="{Binding Location,Mode=TwoWay}" Canvas.Left="{Binding Location.X}" Canvas.Top="{Binding Location.Y}" IsSelected="{Binding IsSelected,RelativeSource={RelativeSource AncestorType=p:DiagramViewItem}}" Tag="{Binding}">
+                                    <Grid>
+                                        <Path Fill="{Binding Theme.Background,FallbackValue=White}" Stretch="Uniform" Stroke="{Binding Theme.BorderBrush, FallbackValue=#FF003657}" StrokeThickness="{Binding Theme.BorderThickness,FallbackValue=1}" Margin="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Data="F1 M 128,20.9437L 4.38193,235.056L 251.618,235.056L 128,20.9437 Z "/>
+                                    </Grid>
+                                </c:Resizeable>
+                                <local:Connector OriginLocation="{Binding Location}" OriginSize="{Binding Size}"
+                                                 TargetLocation="{Binding Base.Location}" TargetSize="{Binding Base.Size}"
+                                                 UseCardinality="False" Panel.ZIndex="-1"/>
+
+                                <ItemsControl ItemsSource="{Binding Child}" Panel.ZIndex="-1">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <local:Connector TargetLocation="{Binding Location}" TargetSize="{Binding Size}"
+                                                                     OriginLocation="{Binding Tag.Location,ElementName=rsz}" OriginSize="{Binding Tag.Size,ElementName=rsz}"
+                                                                     VerticalAlignment="Top" HorizontalAlignment="Left"
+                                                                     UseCardinality="False"/>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </Canvas>
+                        </DataTemplate>
+
+                        <Style TargetType="p:DiagramViewItem" x:Key="EntityStyle">
+                            <Style.Setters>
+                                <Setter Property="Canvas.Left" Value="{Binding Location.X,Mode=TwoWay, FallbackValue=0}"/>
+                                <Setter Property="Canvas.Top" Value="{Binding Location.Y,Mode=TwoWay, FallbackValue=0}"/>
+                            </Style.Setters>
+                        </Style>
+                        <Style TargetType="p:DiagramViewItem" x:Key="RelationshipStyle">
+                            <Style.Setters>
+                                <Setter Property="Canvas.Left" Value="0"/>
+                                <Setter Property="Canvas.Top" Value="0"/>
+                                <Setter Property="Panel.ZIndex" Value="-1"/>
+                            </Style.Setters>
+                        </Style>
+                        <Style TargetType="p:DiagramViewItem" x:Key="SpecializationStyle">
+                            <Style.Setters>
+                                <Setter Property="Canvas.Left" Value="0"/>
+                                <Setter Property="Canvas.Top" Value="0"/>
+                                <Setter Property="Panel.ZIndex" Value="-1"/>
+                            </Style.Setters>
+                        </Style>
+                        <local:ERContainerStyleSelector x:Key="DiagramStyleSelector" EntityStyle="{StaticResource EntityStyle}" RelationshipStyle="{StaticResource RelationshipStyle}" SpecializationStyle="{StaticResource SpecializationStyle}"/>
+
+                        <local:ERTemplateSelector x:Key="DiagramTemplateSelector" EntityTemplate="{StaticResource EntityTemplate}" RelationshipTemplate="{StaticResource RelationshipTemplate}" SpecializationTemplate="{StaticResource SpecializationTemplate}"/>
+
+                    </ControlTemplate.Resources>
+                    <Border Background="#FFFAFAFA">
+                        <ScrollViewer 
+                            Style="{StaticResource ScrollViewerStyle}"
+                            x:Name="PART_SCROLLVIEWER" 
+                            VerticalScrollBarVisibility="Auto" 
+                            HorizontalScrollBarVisibility="Auto"
+                            VerticalContentAlignment="Top"
+                            HorizontalContentAlignment="Left">
+                            <Border x:Name="PART_CONTAINER" Margin="30"  BorderBrush="#FFB4B4B4" BorderThickness="1" HorizontalAlignment="Left" VerticalAlignment="Top">
+                                <Grid>
+                                    
+                                    <p:DiagramView
+                                    x:Name="PART_DIAGRAM"
+                                    Background="{TemplateBinding Background}"
+                                    ItemsSource="{Binding DataSource, RelativeSource={RelativeSource TemplatedParent}}" 
+                                    ItemContainerStyleSelector="{StaticResource DiagramStyleSelector}"  
+                                    ItemTemplateSelector="{StaticResource DiagramTemplateSelector}" 
+                                    Width="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=CanvasSize.Width}"
+                                    Height="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=CanvasSize.Height}"                                
+                                    RenderTransformOrigin="0,0"/>
+
+                                    <Canvas x:Name="PART_OVERLAY_CANVAS" Panel.ZIndex="1" RenderTransformOrigin="0,0"/>
+                                </Grid>
+                            </Border>
+                            <ScrollViewer.Triggers>
+                                <EventTrigger RoutedEvent="UIElement.MouseMove">
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(ScrollViewer.HorizontalScrollBarVisibility)" Storyboard.TargetName="PART_SCROLLVIEWER">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static ScrollBarVisibility.Visible}"/>
+                                                <DiscreteObjectKeyFrame KeyTime="0:0:5" Value="{x:Static ScrollBarVisibility.Hidden}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(ScrollViewer.VerticalScrollBarVisibility)" Storyboard.TargetName="PART_SCROLLVIEWER">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static ScrollBarVisibility.Visible}"/>
+                                                <DiscreteObjectKeyFrame KeyTime="0:0:5" Value="{x:Static ScrollBarVisibility.Hidden}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                            </ScrollViewer.Triggers>
+                        </ScrollViewer>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="ShowGrid" Value="False">
+                <Setter Property="Background" Value="White"/>
+            </Trigger>            
+        </Style.Triggers>
+    </Style>
+
+</ResourceDictionary>

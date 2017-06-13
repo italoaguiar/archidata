@@ -1,0 +1,25 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:a="http://icsharpcode.net/sharpdevelop/avalonedit"
+    xmlns:local="clr-namespace:TextEditor">
+
+
+    <Style TargetType="local:Editor">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="local:Editor">
+                    <Grid>
+                        <a:TextEditor 
+                            x:Name="PART_EDITOR"                             
+                            SyntaxHighlighting="sql"
+                            ShowLineNumbers="True"                            
+                            FontFamily="Consolas" 
+                            FontSize="14"/>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

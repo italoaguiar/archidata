@@ -1,0 +1,322 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Archidata.Core.Controls.FlyoutHelper" Collapsed="true">
+    <Position X="14.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAQAAAAAAAAAAAAAAAAAAAAAAAAQAQAAAEAAAAAAA=</HashCode>
+      <FileName>Controls\FlyoutHelper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Archidata.Core.Controls.Flyout" Collapsed="true">
+    <Position X="13" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAQAAkAEIAAAAAAAAgAAAAAQAAAAAAAAAAAAAAI=</HashCode>
+      <FileName>Controls\FlyoutHelper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Archidata.Core.Controls.FlyoutMenu" Collapsed="true">
+    <Position X="6" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAQAAAAEAAAAAAAAAgEAAAAQAAAAAAAAAAQAAAI=</HashCode>
+      <FileName>Controls\FlyoutMenu.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Archidata.Core.Controls.FlyoutMenuItem" Collapsed="true">
+    <Position X="7.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Controls\FlyoutMenu.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Archidata.Core.Controls.FileMenu" Collapsed="true">
+    <Position X="7.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAgAAAAAABEABAAAAgAAAEEQAEAAAAAAAAAAAQAAAI=</HashCode>
+      <FileName>Controls\Menu\FileMenu.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Archidata.Core.Controls.FileMenuItem" Collapsed="true">
+    <Position X="9.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAAAEAAAAAAAAAgAAAACAAIAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>Controls\Menu\FileMenu.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Archidata.Core.Controls.MenuButton" Collapsed="true">
+    <Position X="13" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAAEQAAAAAAAAgAAAAAAAIAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>Controls\Menu\MenuButton.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Archidata.Core.Controls.MenuContainer" Collapsed="true">
+    <Position X="14.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Controls\Menu\MenuContainer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Archidata.Core.Controls.MenuRadioButton" Collapsed="true">
+    <Position X="6" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAAEQAAAAAAAAgAAAAAAAIAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>Controls\Menu\MenuRadioButton.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Archidata.Core.Controls.ThemeControl" Collapsed="true">
+    <Position X="7.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>kABBAAAARQFACAAAAARBgAAAhBAAAAAAAJAQCYAAAAA=</HashCode>
+      <FileName>Controls\Menu\ThemeControl.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Archidata.Core.Controls.ThemeList" Collapsed="true">
+    <Position X="9.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAgAAAAAAAgAAAAAAAAAgAAAAAQAAAA=</HashCode>
+      <FileName>Controls\Menu\ThemeList.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Archidata.Core.Controls.ThemeListItem" Collapsed="true">
+    <Position X="11.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Controls\Menu\ThemeList.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Archidata.Core.Controls.PropertyEditor" Collapsed="true">
+    <Position X="9.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAACAhA=</HashCode>
+      <FileName>Controls\PropertyEditor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Archidata.Core.Controls.PropertyModel" Collapsed="true">
+    <Position X="11.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAABAAAA=</HashCode>
+      <FileName>Controls\PropertyEditor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Archidata.Core.Controls.Resizeable" Collapsed="true">
+    <Position X="13" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAiQggEAADBkAAAAAIAAAAAAEAAAAAAIAAAJAhAAAI=</HashCode>
+      <FileName>Controls\Resizeable.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Archidata.Core.Controls.UniformScrollViewer" Collapsed="true">
+    <Position X="14.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Controls\UniformScrollViewer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DataModel.Collections.AttributeCollection" Collapsed="true">
+    <Position X="9.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAABAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DataModel\Collections\AttributeCollection.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DataModel.Database.TableAttribute" Collapsed="true">
+    <Position X="3.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAgAAAAAAEoEAAYJRggAAFAAAAAQCAABAAgBA=</HashCode>
+      <FileName>DataModel\Database\Attribute.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="DataModel.Database.AutoIncrement" Collapsed="true">
+    <Position X="11.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAIAAAAKAAAACAAAAAACAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DataModel\Database\AutoIncrement.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DataModel.Database.DatabaseModel" Collapsed="true">
+    <Position X="14.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAUAAAAAAAAAAAAAAAAAABAAA=</HashCode>
+      <FileName>DataModel\Database\DatabaseModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DataModel.Database.DBType" Collapsed="true">
+    <Position X="6" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAAEAAAQAAAAAAAAAhAAAAAAAIAI=</HashCode>
+      <FileName>DataModel\Database\DBType.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DataModel.Database.DefaultTypes" Collapsed="true">
+    <Position X="9.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EBECAAAAAAAACAAQBACgACIAEQAoCQwIAAEAAAQAACg=</HashCode>
+      <FileName>DataModel\Database\DefaultTypes.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DataModel.Database.ReferencialAttribute" Collapsed="true">
+    <Position X="3.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEA=</HashCode>
+      <FileName>DataModel\Database\ReferencialAttribute.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DataModel.Database.Table" Collapsed="true">
+    <Position X="14.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQQAAAAEAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DataModel\Database\Table.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DataModel.Database.Validation.DecimalLengthType" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="7.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DataModel\Database\Validation\DecimalLengthType.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="DataModel.Database.Validation.EmptyLengthType" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="6" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DataModel\Database\Validation\EmptyLengthType.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="DataModel.Database.Validation.IntegerLengthType" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="9.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DataModel\Database\Validation\IntegerLengthType.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Archidata.Core.Helpers.CommandAdapter" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="13" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAAACAAQAAEAAAAAAAAAAAAAAAAAAABAAABA=</HashCode>
+      <FileName>Helpers\CommandAdapter.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Archidata.Core.Plugin.App" Collapsed="true">
+    <Position X="6" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIAAAAAAIAAAAAAAAAAAAAAAAEAABAAAAAAAAAA=</HashCode>
+      <FileName>Plugin\App.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Archidata.Core.Plugin.Dialog" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="14.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAEAAAAAAAwAAAAEAAAAEEAgABAAAAAQAAAAABAAAA=</HashCode>
+      <FileName>Plugin\Dialog.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Archidata.Core.Plugin.FileType" Collapsed="true">
+    <Position X="11.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAgAAAAAAAAAAAAAAAAAQAAAIAAAAEAACA=</HashCode>
+      <FileName>Plugin\FileType.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Archidata.Core.Plugin.IOPlugin" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="11.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAQAAIAAAAAAEgAAAAAAAAAgAAAAgAAA=</HashCode>
+      <FileName>Plugin\IOPlugin.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Archidata.Core.Plugin.Theme" Collapsed="true">
+    <Position X="6" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAAAAAIAAAAABAACAACIAAAAAAAAAAgAQAAAAA=</HashCode>
+      <FileName>Plugin\Theme.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Archidata.Core.Plugin.UIPlugin" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="13" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>GAQBRLQEFERALgQQNEQEJAADgoAAIABIAAkDAAEGCgA=</HashCode>
+      <FileName>Plugin\UIPlugin.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Archidata.Core.AsyncOperationProgress" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="7.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAACAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAABAA=</HashCode>
+      <FileName>Plugin\AsyncOperationProgress.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Archidata.Core.OperationReport" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="7.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAAAAAAAAMIAAAEAAgAAAAAAAAIAAAACAAAA=</HashCode>
+      <FileName>Plugin\AsyncOperationProgress.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Archidata.Core.Plugin.Diagram.DiagramView" Collapsed="true">
+    <Position X="11.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAACBAAAAAAAAAkEAAAAAAAAAFAAAAQCAAA=</HashCode>
+      <FileName>Plugin\Diagram\DiagramView.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Archidata.Core.Plugin.Diagram.DiagramViewItem" Collapsed="true">
+    <Position X="13" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AoAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAKAAA=</HashCode>
+      <FileName>Plugin\Diagram\DiagramViewItem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="DataModel.Database.Validation.ITypeLengthValidator" Collapsed="true">
+    <Position X="11.25" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DataModel\Database\Validation\ITypeLengthValidator.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="DataModel.IThemeable" Collapsed="true">
+    <Position X="9.5" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DataModel\IThemeable.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Archidata.Core.Plugin.IDiagramPlugin" Collapsed="true">
+    <Position X="0.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Plugin\IDiagramPlugin.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Archidata.Core.Plugin.IIOPlugin" Collapsed="true">
+    <Position X="6" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAgAAAAAAAA=</HashCode>
+      <FileName>Plugin\IIOPlugin.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Archidata.Core.Plugin.IModelSource" Collapsed="true">
+    <Position X="7.75" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAA=</HashCode>
+      <FileName>Plugin\IModelConverter.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Archidata.Core.Plugin.IUIPlugin" Collapsed="true">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAJAAAEAALAAQEAQAIAAAAIAAIAAAAAkAAAAEAAA=</HashCode>
+      <FileName>Plugin\IUIPlugin.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

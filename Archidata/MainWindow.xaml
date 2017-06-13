@@ -1,0 +1,307 @@
+﻿<Window x:Class="Archidata.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:s="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:c="clr-namespace:Archidata.Core;assembly=Archidata.Core"
+        xmlns:g="clr-namespace:System.Windows.Controls"
+        xmlns:shell="s"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:p="clr-namespace:Archidata.Core.Plugin;assembly=Archidata.Core"
+        xmlns:k="clr-namespace:DataModel.Database;assembly=Archidata.Core"
+        xmlns:local="clr-namespace:Archidata"
+        xmlns:controls="clr-namespace:Archidata.Core.Controls;assembly=Archidata.Core"
+        mc:Ignorable="d"
+        Title="UFOP ArchiData" Height="550" Width="800" 
+        WindowStyle="None" ResizeMode="CanMinimize" AllowsTransparency="True"
+        RenderOptions.BitmapScalingMode="HighQuality"
+        RenderOptions.CachingHint="Cache" x:Name="w"
+        Icon="icon.ico" Style="{DynamicResource DefaultWindowStyle}"
+        >
+
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanConverter"/>
+        <local:EmptyCommand x:Key="EmptyCommand"/>
+    </Window.Resources>
+
+
+    <Grid DataContext="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="25"/>
+        </Grid.RowDefinitions>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Orientation="Horizontal" PreviewMouseDown="Grid_MouseDown" Background="White">
+                <TextBlock Foreground="#FF484848" Text="{Binding CurrentProject.ProjectName,StringFormat={}{0}: }" Margin="10,0,0,0" VerticalAlignment="Center"/>
+                <TextBlock Foreground="#FF484848" Text="{Binding Path=Title, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Column="1">
+                <Button Content="{StaticResource MinimizeIcon}" Width="40" Padding="15,10,15,0" HorizontalContentAlignment="Center" Command="{Binding Commands.Minimize}"/>
+                <Button Content="{StaticResource RestoreIcon}" Width="40" Padding="8" HorizontalContentAlignment="Center" Command="{Binding Commands.Restore}"/>
+                <Button Content="{StaticResource CloseIcon}" Width="40" Padding="8" HorizontalContentAlignment="Center" Command="{Binding Commands.Close}" />
+            </StackPanel>
+        </Grid>
+        <StackPanel Grid.Row="1">
+            <Grid>
+                <TabControl  Height="120" Style="{DynamicResource TabControlMenuStyle}">
+                    <TabItem Header="Designer" Style="{DynamicResource TabItemMenuStyle}">
+                        <StackPanel Orientation="Horizontal">
+                            <controls:MenuContainer Label="Área de Transferência">
+                                <controls:MenuButton x:Name="btnColar" Label="Colar" Icon="Images/Icons/Paste.png" Command="{Binding ViewModel.SelectedItem.Container.PasteCommand}" />
+                                <controls:MenuButton x:Name="btnRecortar" Label="Recortar" Icon="Images/Icons/Cut.png" Orientation="Horizontal" Command="{Binding ViewModel.SelectedItem.Container.CutCommand}"/>
+                                <controls:MenuButton x:Name="btnCopiar" Label="Copiar" Icon="Images/Icons/Copy.png" Orientation="Horizontal" Command="{Binding ViewModel.SelectedItem.Container.CopyCommand}" />
+                            </controls:MenuContainer>
+
+
+                            <ItemsControl ItemsSource="{Binding ViewModel.SelectedItem.Container.MenuControls}">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <StackPanel Orientation="Horizontal"/>
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                            </ItemsControl>
+                            <controls:MenuContainer Label="Temas">
+                                <controls:ThemeControl x:Name="ThemeMenu" AutoPreview="False"/>
+                            </controls:MenuContainer>
+                        </StackPanel>
+                    </TabItem>
+                    <TabItem Header="Banco de Dados" Style="{DynamicResource TabItemMenuStyle}">
+                        <ItemsControl ItemsSource="{Binding Path=DBExtensions, Source={x:Static local:App.Extensions}}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel Orientation="Horizontal"/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                        </ItemsControl>
+                    </TabItem>
+                    <TabItem Header="Exibição" Style="{DynamicResource TabItemMenuStyle}">
+                        <StackPanel Orientation="Horizontal">
+                            <Grid Margin="5,3">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <StackPanel Margin="3">
+                                    <CheckBox x:Name="cbStatus" Content="Barra de Status" IsChecked="True" Margin="3"/>
+                                    <CheckBox Content="Linhas de Grade" IsChecked="{Binding ViewModel.SelectedItem.Container.ShowGrid, Mode=TwoWay}" Margin="3"/>
+                                </StackPanel>
+
+                                <TextBlock HorizontalAlignment="Center" Text="Exibir" Foreground="#FF8C8C8C" Grid.Row="1" FontSize="10" Margin="0,0,0,-3"/>
+                            </Grid>
+                            <Line Y1="0" Y2="1" StrokeThickness="0.5" Stroke="#FFBBBBBB" Stretch="Fill"/>
+                        </StackPanel>
+                    </TabItem>
+                    <TabItem Header="Suplementos" Style="{DynamicResource TabItemMenuStyle}"/>
+                </TabControl>
+
+                <controls:FileMenu x:Name="fmenu" Width="70" Height="27" VerticalAlignment="Top" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Foreground="White" Padding="0,4" Margin="3,0,0,0" FontSize="14" FontWeight="Light">
+                    <controls:FileMenuItem Label="Abrir Projeto" Icon="Images/Icons/Open.png" Command="{Binding OpenProjectCommand}" />
+                    <controls:FileMenuItem Label="Novo Projeto" Icon="Images/Icons/NewProject.png" Command="{Binding NewProjectCommand, RelativeSource={RelativeSource AncestorType=Window}}"/>
+                    <controls:FileMenuItem Label="Novo Arquivo" Icon="Images/Icons/New.png" Command="{Binding NewFileCommand, RelativeSource={RelativeSource AncestorType=Window}}"/>
+                    <controls:FileMenuItem Label="Salvar" Icon="Images/Icons/Save.png"  Command="{Binding ViewModel.SelectedItem.Container.SaveCommand,FallbackValue={StaticResource EmptyCommand}}" />
+                    <controls:FileMenuItem Label="Imprimir" Icon="Images/Icons/Print.png" Command="{Binding ViewModel.SelectedItem.Container.PrintCommand,FallbackValue={StaticResource EmptyCommand}}"/>
+                    <controls:FileMenuItem Label="Exportar" Icon="Images/Icons/Export.png" Command="{Binding ViewModel.SelectedItem.Container.ExportCommand,FallbackValue={StaticResource EmptyCommand}}"/>
+                    <controls:FileMenuItem Label="Configurar" Icon="Images/Icons/Export.png" Command="{Binding ConfigurePaperCommand, RelativeSource={RelativeSource AncestorType=Window}}"/>
+
+                    <controls:FileMenu.RightContainer>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Border BorderBrush="#FFAEADAD" BorderThickness="0,0,0,1">
+                                <TextBlock Text="Projetos Recentes" FontWeight="SemiBold" Padding="5,3" Foreground="#FF4D4D4D"/>
+                            </Border>
+                            <ListBox Grid.Row="1" BorderThickness="0" ItemContainerStyle="{DynamicResource ListBoxItemFlatStyle}" ItemsSource="{Binding RecentProjects}" SelectionChanged="OnRecentProjectsChanged">
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding}" ToolTip="{Binding}" Foreground="Black" Width="250" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis"/>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                        </Grid>
+                    </controls:FileMenu.RightContainer>
+
+                </controls:FileMenu>
+            </Grid>
+        </StackPanel>
+
+        <Grid Grid.Row="2" Margin="0,5,0,2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="300"/>
+                <ColumnDefinition Width="5"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Border Grid.Column="0"  BorderThickness="0, 0.5,0.5,0.5" BorderBrush="#FF828790">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="5"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Border Background="#FF6A1515" BorderThickness="0,0,0,0.5" BorderBrush="#FF828790">
+                            <TextBlock Text="Explorador de Arquivos"  FontSize="12" Foreground="White" VerticalAlignment="Center" Margin="10,0"/>
+                        </Border>
+
+                        <TreeView Grid.Row="1" BorderThickness="0" >
+                            <TreeViewItem IsExpanded="True" ItemsSource="{Binding CurrentProject.Files}">
+                                <TreeViewItem.Header>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
+                                        <Image Source="Images/Icons/Project.png" Margin="5,0" Width="20" Height="20"/>
+                                        <TextBlock Text="{Binding CurrentProject.ProjectName}" VerticalAlignment="Center"/>
+                                    </StackPanel>
+                                </TreeViewItem.Header>
+                                <TreeViewItem.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <StackPanel.InputBindings>
+                                                <MouseBinding 
+                                                        Gesture="LeftDoubleClick" 
+                                                        Command="{Binding Commands.OpenProjectFile, RelativeSource={RelativeSource AncestorType=Window}}"
+                                                        CommandParameter="{Binding}"/>
+                                            </StackPanel.InputBindings>
+                                            <Image Source="{Binding Icon}" Margin="5,0" Width="20" Height="20"/>
+                                            <TextBlock Text="{Binding FileName}"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </TreeViewItem.ItemTemplate>
+                            </TreeViewItem>
+                        </TreeView>
+                    </Grid>
+                    <GridSplitter Grid.Row="1" Height="5" HorizontalAlignment="Stretch" Background="White"/>
+                    <Border Grid.Row="2">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Border Background="#FF6A1515" BorderThickness="0,0.5" BorderBrush="#FF828790">
+                                <TextBlock Text="Propriedades" FontSize="12" Foreground="White" VerticalAlignment="Center" Margin="10,0"/>
+                            </Border>
+
+                            <Grid Grid.Row="1">
+                                <g:PropertyGrid Margin="0,0,1,1"  SelectedObject="{Binding ViewModel.SelectedItem.Container.SelectedItem}" HelpVisible="False" ToolbarVisible="False"/>
+                                <!--<s:PropertyGrid Background="#FFF7F7F7" SelectedObject="{Binding ViewModel.SelectedItem.Container.SelectedItem}" BorderThickness="0" Foreground="#FF515151" FilterWatermark="Procurar" Margin="-2,0,2,0"/>-->
+                                <!--<Border BorderBrush="Black" BorderThickness="1">
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition/>
+                                            </Grid.RowDefinitions>
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="Auto"/>
+                                                    <ColumnDefinition Width="Auto"/>
+                                                    <ColumnDefinition/>
+                                                </Grid.ColumnDefinitions>
+                                                <Button Grid.Column="0" Padding="2" Width="28">
+                                                    <Canvas Width="24" Height="24" Canvas.Left="0" Canvas.Top="0">
+                                                        <Rectangle Width="14" Height="1" Canvas.Left="9" Canvas.Top="5" Stretch="Fill" Fill="#FF000000"/>
+                                                        <Path Width="4" Height="5" Canvas.Left="2" Canvas.Top="4" Stretch="Fill" Fill="#FF000000" Data="F1 M 6.60895,7.36022L 1.68489,4.51731L 1.68489,10.2031L 6.60895,7.36022 Z "/>
+                                                        <Rectangle Width="14" Height="1" Canvas.Left="9" Canvas.Top="8" Stretch="Fill" Fill="#FF000000"/>
+                                                        <Rectangle Width="14" Height="1" Canvas.Left="9" Canvas.Top="13" Stretch="Fill" Fill="#FF000000"/>
+                                                        <Path Width="4" Height="5" Canvas.Left="2" Canvas.Top="12" Stretch="Fill" Fill="#FF000000" Data="F1 M 6.70401,15.375L 1.77994,12.5321L 1.77994,18.2179L 6.70401,15.375 Z "/>
+                                                        <Rectangle Width="14" Height="1" Canvas.Left="9" Canvas.Top="16" Stretch="Fill" Fill="#FF000000"/>
+                                                    </Canvas>
+
+                                                </Button>
+                                                
+                                                <ToggleButton Grid.Column="1" Padding="2,0,2,2" Width="28">A-Z</ToggleButton>
+                                                <TextBox Grid.Column="2" Margin="3"/>
+                                            </Grid>
+                                            <Line X1="0" X2="1" Stroke="Black" Grid.Row="1" Height="1" Margin="0,2" Stretch="Fill"/>
+                                            <Grid Grid.Row="2" VerticalAlignment="Top">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="6*"/>
+                                                    <ColumnDefinition Width="4*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <TextBlock Text="Propriedade" Margin="3,0" VerticalAlignment="Center"/>
+                                                <TextBox Grid.Column="1" VerticalAlignment="Top" Margin="3"/>
+                                            </Grid>
+                                        </Grid>                                        
+                                    </Border>-->
+                            </Grid>
+
+                            <!--<g:PropertyGrid  Grid.Row="1"  SelectedObject="{Binding ViewModel.SelectedItem.Container.SelectedItem}" HelpVisible="False" ToolbarVisible="False" OverridesDefaultStyle="True">
+
+
+                                </g:PropertyGrid>-->
+                        </Grid>
+                    </Border>
+                </Grid>
+            </Border >
+
+            <Grid Grid.Column="2">
+                <TabControl ItemsSource="{Binding ViewModel.Items}" BorderThickness="0.5,0.5,0,0.5" SelectedItem="{Binding ViewModel.SelectedItem,Mode=TwoWay}" Background="#FFFAFAFA" >
+                    <TabControl.ItemContainerStyle>
+                        <Style TargetType="TabItem" BasedOn="{StaticResource TabItemMenuStyle}">
+                            <Setter Property="Content" Value="{Binding Container}"/>
+                            <Setter Property="Padding" Value="0"/>
+                        </Style>
+                    </TabControl.ItemContainerStyle>
+                    <TabControl.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Margin="6,0,0,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="20"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock  Text="{Binding File.FileName}" Margin="5,2" VerticalAlignment="Center"/>
+                                <Button x:Name="header" Grid.Column="1" CommandParameter="{Binding}" 
+                                            Command="{Binding CloseCommand}" Style="{DynamicResource TabItemCloseButtonStyle}" 
+                                            Visibility="{Binding IsSelected, RelativeSource={RelativeSource AncestorType=TabItem}, 
+                                            Converter={StaticResource BooleanConverter}}" VerticalAlignment="Center"/>
+                            </Grid>
+                        </DataTemplate>
+                    </TabControl.ItemTemplate>
+
+                </TabControl>
+            </Grid>
+            <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch" Background="White"/>
+        </Grid>
+
+        <StatusBar Grid.Row="3" Background="#FF6A1515" Margin="-1,0,-1,-1" Padding="5,0" Visibility="{Binding IsChecked,ElementName=cbStatus,Converter={StaticResource BooleanConverter}}">
+            <StatusBar.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <Grid Grid.Row="3">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="40"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                    </Grid>
+                </ItemsPanelTemplate>
+            </StatusBar.ItemsPanel>
+            <StatusBarItem>
+                <Grid>
+                    <TextBlock Text="Pronto" Foreground="White"/>
+                    <StackPanel Orientation="Horizontal" Visibility="{Binding Source={x:Static c:AsyncOperationProgress.CurrentStatus}, Path=IsActive, Converter={StaticResource BooleanConverter}}">
+                        <ProgressBar Width="80" Minimum="0" Maximum="100" Value="{Binding Source={x:Static c:AsyncOperationProgress.CurrentStatus}, Path=Progress}" Margin="0,0,5,0"/>
+                        <TextBlock Text="{Binding Source={x:Static c:AsyncOperationProgress.CurrentStatus}, Path=OperationLabel}" Foreground="White"/>
+                    </StackPanel>
+                </Grid>
+
+            </StatusBarItem>
+            <StatusBarItem Grid.Column="1">
+                <TextBlock Text="{Binding ViewModel.SelectedItem.Container.Zoom, StringFormat={}{0:0%}}"  HorizontalAlignment="Center" VerticalAlignment="Center" />
+            </StatusBarItem>
+            <StatusBarItem Grid.Column="2">
+                <Slider Value="{Binding ViewModel.SelectedItem.Container.Zoom, Mode=TwoWay}" Minimum="0.1" Maximum="4" Width="140" VerticalAlignment="Center" Margin="0,0,10,0"/>
+            </StatusBarItem>
+        </StatusBar>
+    </Grid>
+</Window>

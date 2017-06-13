@@ -1,0 +1,19 @@
+﻿<Window x:Class="Archidata.SplashScreen"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Archidata"
+        mc:Ignorable="d"
+        Icon="icon.ico"
+        Title="SplashScreen" Height="200" Width="410" AllowsTransparency="True" WindowStyle="None" Background="Transparent" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="Images/SplashScreen.png"/>
+        </Grid.Background>
+        <Canvas>
+            <ProgressBar Width="253" Height="15" Canvas.Left="147" Canvas.Top="141" IsIndeterminate="True"/>
+            <TextBlock Text="Carregando Componentes..." Foreground="White" Canvas.Left="147" Canvas.Top="161" Width="253" TextAlignment="Center" TextTrimming="WordEllipsis"/>
+        </Canvas>
+    </Grid>
+</Window>
